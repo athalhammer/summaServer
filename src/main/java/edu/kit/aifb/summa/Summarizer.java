@@ -16,6 +16,12 @@ import edu.kit.aifb.summa.model.TripleMeta;
 import edu.kit.aifb.summa.model.URI;
 import edu.kit.aifb.summa.model.TripleMeta.TripleFocus;
 
+
+/**
+ * This is an example summarization approach that generates summaries with
+ * the DBpedia SPARQL endpoint.
+ *
+ */
 public class Summarizer {
 	
 	private static final String REPOSITORY = "http://dbpedia.org/sparql";
@@ -139,5 +145,4 @@ public class Summarizer {
 		}
 		return result;
 	}
-
 }
