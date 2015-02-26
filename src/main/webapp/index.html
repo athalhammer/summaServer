@@ -2,67 +2,13 @@
 <html lang="en"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<title>summarum+</title>
+<title>SUMMA server</title>
 <style>
 </style>
-
 </head>
 <body>
 
-<h1>SUMMARUM<sup>+</sup></h1>
+<h1>SUMMA server implementation</h1>
 
-<br>
-
-<h2>Overview</h2>
-<p>How to use the SUMMARUM<sup>+</sup> service:</p>
-<ul><li>query parameter <i>entity*</i>: the URI of the DBpedia resource</li>
-<li>query parameter <i>topK*</i>: the number of triples the summary should contain</li>
-<li>query parameter <i>maxHops</i> the maximum number of hops in the graph the result should contain.
-<li>query parameter <i>language</i> defines the language of the output literals. We recommend to use <a href="http://www.ietf.org/rfc/rfc4646.txt">RFC 4646</a>.
-<li>query parameter <i>fixedProperty</i>: the URI of a DBpedia predicate. If this parameter is present, the<br> system focuses on statements that involve the given entity in combination
-with the given predicate.
-</li>
-</ul>
-The parameters marked with the star symbol (*) are mandatory. <br><br>
-
-Example queries:<br><br>
-
-<strong>HTML</strong>
-<p>
-<a href="summarum?entity=http://dbpedia.org/resource/Vladimir_Putin&amp;topK=5">summarum?entity=http://dbpedia.org/resource/Vladimir_Putin&amp;topK=5</a><br>
-<a href="summarum?entity=http://dbpedia.org/resource/Original_Sin_(2001_film)&amp;topK=5">summarum?entity=http://dbpedia.org/resource/Original_Sin_(2001_film)&amp;topK=5</a><br>
-<a href="summarum?entity=http://dbpedia.org/resource/Usain_Bolt&amp;topK=5">summarum?entity=http://dbpedia.org/resource/Usain_Bolt&amp;topK=5</a><br>
-<a href="summarum?entity=http://dbpedia.org/resource/Marie_Curie&amp;topK=10">summarum?entity=http://dbpedia.org/resource/Marie_Curie&amp;topK=10</a><br>
-<a href="summarum?entity=http://dbpedia.org/resource/Manchester_City_F.C.&amp;topK=10">summarum?entity=http://dbpedia.org/resource/Manchester_City_F.C.&amp;topK=10</a><br>
-<a href="summarum?entity=http://dbpedia.org/resource/Lexus&amp;topK=10">summarum?entity=http://dbpedia.org/resource/Lexus&amp;topK=10</a><br>
-<a href="summarum?entity=http://dbpedia.org/resource/The_Cosby_Show&amp;topK=10">summarum?entity=http://dbpedia.org/resource/The_Cosby_Show&amp;topK=10</a><br>
-</p>
-
-<strong>Turtle</strong>
-(to copy&amp;paste for console)
-<pre>
-curl -i -d "[ a &lt;http://purl.org/voc/summa/Summary&gt; ; \
-&lt;http://purl.org/voc/summa/entity&gt; \
-&lt;http://dbpedia.org/resource/Porsche&gt; ; \
-&lt;http://purl.org/voc/summa/topK&gt; '5'; \
-&lt;http://purl.org/voc/summa/maxHops&gt; '1'; \
-&lt;http://purl.org/voc/summa/language&gt; 'en'; \
-&lt;http://purl.org/voc/summa/fixedProperty&gt; \
-&lt;http://dbpedia.org/ontology/keyPerson&gt;; \
-&lt;http://purl.org/voc/summa/fixedProperty&gt; \
-&lt;http://dbpedia.org/ontology/owner&gt;  ] ." \
--H "content-type: text/turtle" -H "accept: text/turtle" http://km.aifb.kit.edu/summaPlus/summarum
-</pre>
-
-<h2>Configuration:</h2>
-<ul>
-<li>Alpha: 0.8</li>
-<li>Connections: outgoing only</li>
-<li>Dataset: DBpedia 2014</li>
-</ul>
-
-
-    <hr/>
-    Contact <a href="http://www.aifb.kit.edu/web/Andreas_Thalhammer/en">Andreas Thalhammer</a>.
 </body>
 </html>
