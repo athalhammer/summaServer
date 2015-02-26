@@ -47,9 +47,13 @@ public class Summarizer {
 	public LinkedList<TripleMeta> summarize(java.net.URI uri, String[] fixedProperties,
 			Integer topK, Integer maxHops, String language) {
 		HTTPRepository rep = new HTTPRepository(REPOSITORY);
+		if (language == null) {
+			language = "en";
+		}
 		
-		RepositoryConnection con = null;	
-		
+		RepositoryConnection con = null;
+
+		 
 		LinkedList<TripleMeta> result = new LinkedList<TripleMeta>();
 		try {
 			con = rep.getConnection();
