@@ -3,6 +3,7 @@ package edu.kit.aifb.summa.servlet;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Iterator;
 import java.util.List;
@@ -41,7 +42,7 @@ import edu.kit.aifb.summa.model.URI;
 public class JerseyService {
 	
 	// path of this service
-	private static final String PATH = "http://example-path";
+	private static final String PATH = "http://km.aifb.kit.edu/summaServer/sum";
 	
 	// SUMMA vocabulary
 	private static final String SUMMARY = "http://purl.org/voc/summa/Summary";
@@ -133,7 +134,7 @@ public class JerseyService {
     		@QueryParam("fixedProperty") String fixedProperty,
     		@QueryParam("language") String language,
     		@QueryParam("maxHops") Integer maxHops,
-    		@HeaderParam("Accept") String outputMime) 
+    		@HeaderParam("Accept") String outputMime)
 	{
 		
 		RDFFormat outputFormat = Rio.getParserFormatForMIMEType(outputMime.split(",")[0]);
