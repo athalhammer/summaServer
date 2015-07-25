@@ -3,7 +3,6 @@ package edu.kit.aifb.summa.servlet;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Iterator;
 import java.util.List;
@@ -33,7 +32,7 @@ import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.Rio;
 import org.openrdf.rio.UnsupportedRDFormatException;
 
-import edu.kit.aifb.summa.Summarizer;
+import edu.kit.aifb.summa.SimpleSummarizer;
 import edu.kit.aifb.summa.model.TripleMeta;
 import edu.kit.aifb.summa.model.URI;
 
@@ -165,7 +164,7 @@ public class JerseyService {
     	java.net.URI uri = null;
 		try {
 			uri = new java.net.URI(entity);
-			res = new Summarizer().summarize(uri, fixedProperties, topK, maxHops, language);
+			res = new SimpleSummarizer().summarize(uri, fixedProperties, topK, maxHops, language);
 			
 		} catch (NullPointerException e){
 			e.printStackTrace();
