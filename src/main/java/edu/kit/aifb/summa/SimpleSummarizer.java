@@ -26,27 +26,26 @@ public class SimpleSummarizer implements Summarizer {
 	
 	private static final String REPOSITORY = "http://dbpedia.org/sparql";
 	
-	private static final String QUERY_0 = "PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>"
-			+ "SELECT DISTINCT ?l FROM <http://dbpedia.org> WHERE { "
+	private static final String QUERY_0 = "SELECT DISTINCT ?l FROM <http://dbpedia.org> WHERE { "
 			+ "OPTIONAL {<ENTITY> <http://www.w3.org/2000/01/rdf-schema#label> ?l ."
 			+ "FILTER regex(lang(?l), \"LANG\", \"i\") . }}";
 	
-	private static final String QUERY_1 = "PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>"
+	private static final String QUERY_1 = "PREFIX vrank:<http://purl.org/voc/vrank#>"
 			+ "SELECT DISTINCT ?o ?l "
-			+ "FROM <http://dbpedia.semanticmultimedia.org/dbpedia2014/en/pageinlinkCounts_en_2014.ttl.bz2> "
+			+ "FROM <http://people.aifb.kit.edu/ath/#DBpedia_PageRank> "
 			+ "FROM <http://dbpedia.org> WHERE"
-			+ "{<ENTITY> ?p ?o . ?o dbpedia-owl:wikiPageInLinkCountCleaned ?pageInLinkCount."
+			+ "{<ENTITY> ?p ?o . ?o vrank:hasRank/vrank:rankValue ?pageInLinkCount."
 			+ "PREDICATES"
 			+ "OPTIONAL {?o <http://www.w3.org/2000/01/rdf-schema#label> ?l . "
 			+ "FILTER regex(lang(?l), \"LANG\", \"i\") .}}"
 			+ "ORDER BY DESC (?pageInLinkCount) LIMIT TOPK";
 	
-	private static final String QUERY_2 = "PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>"
+	private static final String QUERY_2 = "PREFIX vrank:<http://purl.org/voc/vrank#>"
 			+ "SELECT ?p ?l ?rank "
-			+ "FROM <http://dbpedia.semanticmultimedia.org/dbpedia2014/en/pageinlinkCounts_en_2014.ttl.bz2> "
+			+ "FROM <http://people.aifb.kit.edu/ath/#DBpedia_PageRank> "
 			+ "FROM <http://dbpedia.org> WHERE {"
 			+ "<ENTITY> ?p <OBJECT> ."
-			+ "<OBJECT> dbpedia-owl:wikiPageInLinkCountCleaned ?rank ."
+			+ "<OBJECT> vrank:hasRank/vrank:rankValue ?rank ."
 			+ "OPTIONAL {?p <http://www.w3.org/2000/01/rdf-schema#label> ?l."
 			+ "FILTER regex(lang(?l), \"LANG\", \"i\")} } ORDER BY asc(?p)";
 	
