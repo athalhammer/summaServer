@@ -9,7 +9,7 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.RepositoryConnection;
-import org.openrdf.repository.http.HTTPRepository;
+import org.openrdf.repository.sparql.SPARQLRepository;
 
 import edu.kit.aifb.summa.model.Property;
 import edu.kit.aifb.summa.model.TripleMeta;
@@ -52,7 +52,8 @@ public class SimpleSummarizer implements Summarizer {
 	
 	public LinkedList<TripleMeta> summarize(java.net.URI uri, String[] fixedProperties,
 			Integer topK, Integer maxHops, String language) {
-		HTTPRepository rep = new HTTPRepository(REPOSITORY);
+		SPARQLRepository rep = new SPARQLRepository(REPOSITORY);
+		
 		if (language == null) {
 			language = "en";
 		}
@@ -62,6 +63,7 @@ public class SimpleSummarizer implements Summarizer {
 		 
 		LinkedList<TripleMeta> result = new LinkedList<TripleMeta>();
 		try {
+			rep.initialize();
 			con = rep.getConnection();
 			TupleQuery q1 = con.prepareTupleQuery(QueryLanguage.SPARQL, 
 					QUERY_0.replace("ENTITY", uri.toString()).replace("LANG", language));
