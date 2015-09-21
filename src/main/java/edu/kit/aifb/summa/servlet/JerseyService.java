@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
@@ -127,6 +128,13 @@ public class JerseyService {
 		return null;
 	}
 	
+	
+	@OPTIONS
+	public Response getOptions() {
+		return Response.ok().header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "GET, POST, OPTIONS").build();
+	}
+	
+	
 	@GET
     public Response getRDF(@QueryParam("entity") String entity,
     		@QueryParam("topK") Integer topK,
@@ -178,7 +186,9 @@ public class JerseyService {
 		try {
 			Rio.write(result, writer, outputFormat);
 			String s = writer.toString();
-			return Response.created(new java.net.URI(r)).header("Content-Type", mime).header("Access-Control-Allow-Origin", "*").entity(s).build();
+			return Response.created(new java.net.URI(r)).header("Content-Type", mime).
+					header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "GET, POST, OPTIONS").
+					entity(s).build();
 		} catch (RDFHandlerException e) {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
