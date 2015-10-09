@@ -14,6 +14,12 @@ public class URI extends URIorLiteral {
 		type = Types.URI;
 	}
 	
+	public URI(java.net.URI uri, String label) {
+		this.uri = uri;
+		this.label = label;
+		type = Types.URI;
+	}
+	
 	public URI(java.net.URI uri, String label, String lang) {
 		this.uri = uri;
 		this.label = label;
