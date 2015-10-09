@@ -241,16 +241,19 @@ public class JerseyService {
     		
     		// add labels
     		String subjectLabel = triple.getSubject().getLabel();
+    		String subjectLabelLang = triple.getSubject().getLang();
     		String predicateLabel = triple.getPredicate().getLabel();
+    		String predicateLabelLang = triple.getSubject().getLang();
     		String objectLabel = ((URI) triple.getObject()).getLabel();
+    		String objectLabelLang = triple.getSubject().getLang();
     		if (subjectLabel != null) {
-    			model.add(f.createStatement(f.createURI(triple.getSubject().getURI().toString()), RDFS.LABEL, f.createLiteral(subjectLabel, "en")));	
+    			model.add(f.createStatement(f.createURI(triple.getSubject().getURI().toString()), RDFS.LABEL, f.createLiteral(subjectLabel, subjectLabelLang)));	
     		}
     		if (predicateLabel != null) {
-    			model.add(f.createStatement(f.createURI(triple.getPredicate().getURI().toString()), RDFS.LABEL, f.createLiteral(predicateLabel, "en")));	
+    			model.add(f.createStatement(f.createURI(triple.getPredicate().getURI().toString()), RDFS.LABEL, f.createLiteral(predicateLabel, predicateLabelLang)));	
     		}    		
     		if (objectLabel != null) {
-        		model.add(f.createStatement(f.createURI(((URI) triple.getObject()).getURI().toString()), RDFS.LABEL, f.createLiteral(objectLabel, "en")));	
+        		model.add(f.createStatement(f.createURI(((URI) triple.getObject()).getURI().toString()), RDFS.LABEL, f.createLiteral(objectLabel, objectLabelLang)));	
     		}
     		
         	model.add(f.createStatement(r, f.createURI(STATEMENT), stmt));

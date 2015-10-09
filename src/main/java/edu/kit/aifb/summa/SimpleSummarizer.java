@@ -1,8 +1,10 @@
 package edu.kit.aifb.summa;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import org.openrdf.model.Literal;
 import org.openrdf.query.Binding;
 import org.openrdf.query.BindingSet;
 import org.openrdf.query.QueryLanguage;
@@ -49,12 +51,28 @@ public class SimpleSummarizer implements Summarizer {
 			+ "OPTIONAL {?p <http://www.w3.org/2000/01/rdf-schema#label> ?l."
 			+ "FILTER regex(lang(?l), \"LANG\", \"i\")} } ORDER BY asc(?p)";
 	
+	
+	/**
+	 * main method to test the summarizer
+	 */
+	public static void main(String[] args) throws URISyntaxException {
+		Summarizer summ = new SimpleSummarizer();
+		LinkedList<TripleMeta> meta = summ.summarize(new java.net.URI("http://dbpedia.org/resource/Barack_Obama"), null, 5, 1, null);
+		for (TripleMeta tripleMeta : meta) {
+			System.out.println(tripleMeta.toString());
+		}
+	}
+	
 	public LinkedList<TripleMeta> summarize(java.net.URI uri, String[] fixedProperties,
 			Integer topK, Integer maxHops, String language) {
 		SPARQLRepository rep = new SPARQLRepository(REPOSITORY);
 		
 		if (language == null) {
 			language = "en";
+		}
+		
+		if (fixedProperties == null) {
+			fixedProperties = new String [0];
 		}
 		
 		RepositoryConnection con = null;
@@ -75,7 +93,7 @@ public class SimpleSummarizer implements Summarizer {
 				if (l == null) {
 					subject = new URI(uri);
 				} else {
-					subject = new URI(uri, l.getValue().stringValue());
+					subject = new URI(uri, l.getValue().stringValue(), ((Literal) l.getValue()).getLanguage());
 				}
 				
 			}
@@ -106,7 +124,7 @@ public class SimpleSummarizer implements Summarizer {
 				if (l == null) {
 					object = new URI(new java.net.URI(o.getValue().toString()));
 				} else {
-					object = new URI(new java.net.URI(o.getValue().toString()), l.getValue().stringValue());
+					object = new URI(new java.net.URI(o.getValue().toString()), l.getValue().stringValue(), ((Literal) l.getValue()).getLanguage());
 				}
 
 				objects.add(object);

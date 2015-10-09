@@ -6,14 +6,18 @@ public class URI extends URIorLiteral {
 	private java.net.URI uri = null;
 	private String label = null;
 	
+	// language of the label
+	private String lang = null;
+	
 	public URI(java.net.URI uri) {
 		this.uri = uri;
 		type = Types.URI;
 	}
 	
-	public URI(java.net.URI uri, String label) {
+	public URI(java.net.URI uri, String label, String lang) {
 		this.uri = uri;
 		this.label = label;
+		this.setLang(lang);
 		type = Types.URI;
 	}
 	
@@ -32,5 +36,13 @@ public class URI extends URIorLiteral {
 	@Override
 	public String toString() {
 		return "<" + uri.toString() + ">";
+	}
+
+	public String getLang() {
+		return lang;
+	}
+
+	public void setLang(String lang) {
+		this.lang = lang;
 	}
 }
