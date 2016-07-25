@@ -36,11 +36,11 @@ public class SimpleSummarizer implements Summarizer {
 			+ "SELECT DISTINCT ?o ?l "
 			+ "FROM <http://people.aifb.kit.edu/ath/#DBpedia_PageRank> "
 			+ "FROM <http://dbpedia.org> WHERE"
-			+ "{<ENTITY> ?p ?o . ?o vrank:hasRank/vrank:rankValue ?pageInLinkCount."
+			+ "{<ENTITY> ?p ?o . ?o vrank:hasRank/vrank:rankValue ?pageRank."
 			+ "PREDICATES"
 			+ "OPTIONAL {?o <http://www.w3.org/2000/01/rdf-schema#label> ?l . "
 			+ "FILTER regex(lang(?l), \"LANG\", \"i\") .}}"
-			+ "ORDER BY DESC (?pageInLinkCount) LIMIT TOPK";
+			+ "ORDER BY DESC (?pageRank) LIMIT TOPK";
 	
 	private static final String QUERY_2 = "PREFIX vrank:<http://purl.org/voc/vrank#>"
 			+ "SELECT ?p ?l ?rank "
